@@ -2,13 +2,13 @@
 Trip Fare Processor
 
 # Clarifications & Assumptions
-* Can the user 
 * Can a bus break down and customer catching a different bus and continuing the journey- Assuming all are given in the
  same file.
 * If the customer does not Touch off by the end of midnight it is considered as Touch Off. Any new touch after this is 
 considered as starting a new journey or Touch On.
 * I am assuming there are two input files - one which contains the cost information and other which contains the 
 information about the trips.
+* 
 
 # Assumptions on the input file
 * Input is formatted and validated.
