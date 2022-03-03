@@ -15,7 +15,7 @@ import java.util.Date;
 @Setter
 public class TapInfo {
 
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @PreAssignmentProcessor(processor = TrimStringBeforeRead.class)
     @CsvBindByName(column = "ID", required = true)

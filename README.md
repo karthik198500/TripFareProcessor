@@ -22,6 +22,13 @@ information about the trips.
   case.
 * What is the size of the incoming file - Assuming this can processed in memory to keep the solution simple. If the
   file becomes too large we process each line one at a time and have to store in a datastore.
+* There is no cases of bus hoping. For example customer A tapped on bus1 and then hopped to bus2, without tapping off 
+  bus1, then hopped back to Bus1 and tapped off.
+* Assume customer travelled from stopId 1,2,3,4,5 where 1 is the start and 5 is the end, if customer starts from 
+  1 (TAP ON) and goes to 5 and travels back in the same bus and reaches 1 again (TAP OFF). In this scenario customer 
+  touches TAP ON and TAP OFF at the same location. As given in the input his fair is zero, though he travelled the whole
+  trip. We assume these scenarios are handled appropriately and input is free of such kind of issues. It can be easily 
+  handled by forcing to TAP OFF at the end of journey or no fare concepts is changed to based on time too.
 
 # Scalability
 * This is a spring boot application, we can easily scale this application by running the same
