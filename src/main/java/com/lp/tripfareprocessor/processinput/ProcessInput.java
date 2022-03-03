@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -80,13 +78,28 @@ public class ProcessInput {
                     .build()
                     .parse();
 
-             Map<String, List<TapInfo>> groupByCustomer = tapInfoList
+        /*   tapInfoList = tapInfoList
+                    .stream()
+                    .sorted(Comparator.comparing(TapInfo::getTapTimeStamp))
+                    .collect(Collectors.toList());
+            */
+            Map<String, List<TapInfo>> groupByCustomer = tapInfoList
                     .stream()
                     .parallel()
-                    .collect(Collectors.groupingByConcurrent(TapInfo::getPan));
+                    .collect(Collectors.groupingByConcurrent(TapInfo::getPan))
+                    .entrySet()
+                    .stream()
+                    .collect(Collectors.toMap(Map.Entry::getKey,
+                            e -> e.getValue()
+                                    .stream()
+                                    .sorted(Comparator.comparing(TapInfo::getTapTimeStamp))
+                                    .collect(Collectors.toList())
+                    ));
 
-
-              List<TapInfo> listCustomerGroup =groupByCustomer
+            /*tapInfoList.forEach(tapInfo -> {
+                log.info(tapInfo.toString());
+            });*/
+            List<TapInfo> listCustomerGroup =groupByCustomer
                     .values()
                     .stream()
                     .flatMap(List:: stream)
@@ -95,8 +108,6 @@ public class ProcessInput {
             listCustomerGroup.forEach(tapInfo -> {
                 log.info(tapInfo.toString());
             });
-
-
 
             List<PriceInfo> priceInfoList = new CsvToBeanBuilder<PriceInfo>(priceInfoFileReader )
                     .withType(PriceInfo.class)
