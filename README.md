@@ -1,6 +1,9 @@
 # TripFareProcessor
 Trip Fare Processor
 
+# Technologies used
+* OpenCSV
+
 # Clarifications & Assumptions
 * Can a bus break down and customer catching a different bus and continuing the journey- Assuming all are given in the
  same file.
