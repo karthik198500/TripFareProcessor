@@ -78,11 +78,6 @@ public class ProcessInput {
                     .build()
                     .parse();
 
-        /*   tapInfoList = tapInfoList
-                    .stream()
-                    .sorted(Comparator.comparing(TapInfo::getTapTimeStamp))
-                    .collect(Collectors.toList());
-            */
             Map<String, List<TapInfo>> groupByCustomer = tapInfoList
                     .stream()
                     .parallel()
@@ -96,9 +91,6 @@ public class ProcessInput {
                                     .collect(Collectors.toList())
                     ));
 
-            /*tapInfoList.forEach(tapInfo -> {
-                log.info(tapInfo.toString());
-            });*/
             List<TapInfo> listCustomerGroup =groupByCustomer
                     .values()
                     .stream()

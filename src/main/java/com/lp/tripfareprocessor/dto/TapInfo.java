@@ -7,11 +7,16 @@ import com.opencsv.bean.processor.PreAssignmentProcessor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Getter
 @Setter
 public class TapInfo {
+
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
     @PreAssignmentProcessor(processor = TrimStringBeforeRead.class)
     @CsvBindByName(column = "ID", required = true)
     private String id;
@@ -47,7 +52,7 @@ public class TapInfo {
         return "TapInfo{" +
                 " pan='" + pan + '\'' +
                 ", id='" + id + '\'' +
-                ", tapTimeStamp=" + tapTimeStamp +
+                ", tapTimeStamp=" + dateFormat.format(tapTimeStamp) +
                 ", tapType='" + tapType + '\'' +
                 ", stopId='" + stopId + '\'' +
                 ", companyId='" + companyId + '\'' +
