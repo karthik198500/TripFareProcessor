@@ -4,8 +4,7 @@ import com.lp.tripfareprocessor.dto.opencsv.TrimStringBeforeRead;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import com.opencsv.bean.processor.PreAssignmentProcessor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,9 +12,12 @@ import java.util.Date;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TapInfo {
 
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     @PreAssignmentProcessor(processor = TrimStringBeforeRead.class)
     @CsvBindByName(column = "ID", required = true)
@@ -52,7 +54,7 @@ public class TapInfo {
         return "TapInfo{" +
                 " pan='" + pan + '\'' +
                 ", id='" + id + '\'' +
-                ", tapTimeStamp=" + dateFormat.format(tapTimeStamp) +
+                ", tapTimeStamp=" + tapTimeStamp != null?dateFormat.format(tapTimeStamp):"" +
                 ", tapType='" + tapType + '\'' +
                 ", stopId='" + stopId + '\'' +
                 ", companyId='" + companyId + '\'' +

@@ -25,8 +25,6 @@ import java.util.stream.Collectors;
 @Log4j2
 public class ProcessPriceInfo {
 
-
-
     @Autowired
     private ResourceLoader resourceLoader;
 

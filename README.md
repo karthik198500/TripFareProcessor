@@ -14,7 +14,8 @@ Trip Fare Processor
 * Spring Boot
 
 # Design
-Please refer the TripFare.pdf in the resources/design folder for a high level architecture.
+* Please refer the TripFare.pdf in the resources/design folder for a high level architecture.
+ 
 
 # Clarifications & Assumptions
 * Can a bus break down and customer catching a different bus and continuing the journey- Assuming all are given in the

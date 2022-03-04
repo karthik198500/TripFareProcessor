@@ -18,11 +18,11 @@ import java.util.Stack;
 @Log4j2
 @Getter
 @Setter
-public class CustomerTapBucketEngine {
+public class TapBucketEngine {
 
     private final TripInfoBuilder tripInfoBuilder;
 
-    public CustomerTapBucketEngine(TripInfoBuilder tripInfoBuilder) {
+    public TapBucketEngine(TripInfoBuilder tripInfoBuilder) {
         this.tripInfoBuilder = tripInfoBuilder;
     }
 
@@ -56,7 +56,7 @@ public class CustomerTapBucketEngine {
     /*
     * Merge Tap ON and Tap OFF (convert it to a trip) when company ID and Bus ID also matches
     */
-    private boolean canMerge( TapInfo top, TapInfo currentTapInfo){
+    public boolean canMerge( TapInfo top, TapInfo currentTapInfo){
         if((top.getTapType().equalsIgnoreCase("ON") && currentTapInfo.getTapType().equalsIgnoreCase("OFF"))&&
                 top.getCompanyId().equalsIgnoreCase(currentTapInfo.getCompanyId()) &&
                 top.getBusId().equalsIgnoreCase(currentTapInfo.getBusId())){

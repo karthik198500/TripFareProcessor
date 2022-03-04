@@ -21,13 +21,13 @@ public class TripFareEngine {
     private final ProcessPriceInfo processPriceInfo;
     private final ProcessTapInfo processTapInfo;
     private final WriteTripInfo writeTripInfo;
-    private final CustomerTapBucketEngine customerTapBucketEngine;
+    private final TapBucketEngine tapBucketEngine;
 
-    public TripFareEngine(ProcessPriceInfo processPriceInfo, ProcessTapInfo processTapInfo, WriteTripInfo writeTripInfo, CustomerTapBucketEngine customerTapBucketEngine) {
+    public TripFareEngine(ProcessPriceInfo processPriceInfo, ProcessTapInfo processTapInfo, WriteTripInfo writeTripInfo, TapBucketEngine tapBucketEngine) {
         this.processPriceInfo = processPriceInfo;
         this.processTapInfo = processTapInfo;
         this.writeTripInfo = writeTripInfo;
-        this.customerTapBucketEngine = customerTapBucketEngine;
+        this.tapBucketEngine = tapBucketEngine;
     }
     @Value("${tap-info}")
     private String tapInformationSrc;
@@ -66,12 +66,12 @@ public class TripFareEngine {
             printGroupedTapInformation(groupByCustomer);
 
 
-            List<TripInfo> tripInfoArrayList =groupByCustomer
+            List<TripInfo> tripInfoArrayList = groupByCustomer
                     .entrySet()
                     .stream()
                     .map( e-> {
-                        // convert the tapInfo grouped by customer to TripInfo for each customer.
-                         return customerTapBucketEngine.
+                        // convert the "tapInfo grouped by customer" to TripInfo for each customer.
+                         return tapBucketEngine.
                                          convertToTripInfoForCustomer(e.getKey(),e.getValue(),priceInfoList);
                     })
                     .collect(
@@ -82,8 +82,6 @@ public class TripFareEngine {
         //Write the Trip Information to the Output Stream
             writeTripInfo.writeTripInfoToOutput(tripInfoArrayList,tripsForCustomer);
     }
-
-
 
     private void printGroupedTapInformation(Map<String, List<TapInfo>> groupByCustomer){
         List<TapInfo> listCustomerGroup =groupByCustomer
