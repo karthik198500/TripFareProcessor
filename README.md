@@ -6,6 +6,8 @@ Trip Fare Processor
 * OpenCSV
 * Spring Boot
 * 
+# Design
+Please refer the TripFare.pdf in the resources/design folder for a high level architecture.
 
 # Clarifications & Assumptions
 * Can a bus break down and customer catching a different bus and continuing the journey- Assuming all are given in the
@@ -45,17 +47,17 @@ considered as starting a new journey or Touch On.
  iterate over the input. Only one bean is read at a time, making multi-threading impossible and slowing down reading, 
  but only one object is in memory at a time (assuming you process and release the object for the garbage collector 
  immediately).
-* For this exercise I have keep it simple.
+* Current implementation reads it line by line to avoid OutOfMemoryError when file size is too large.
 
 # Scalability
-* This is a spring boot application, we can easily scale this application by running the same
-application on multiple nodes.
+* This is a spring boot application, we can easily scale this application by running the same application on multiple 
+  nodes.
 * We can even think about writing the entire thing as lambda and scale horizantally.
 * If we can come up with a rest api which takes the input file as stream, we can convert this 
-to rest api and process the incoming file. But we need proper UI for this to upload the file on another hand we can 
+  to rest api and process the incoming file. But we need proper UI for this to upload the file on another hand we can 
 consider this as service which takes incoming events, each event consisting a input file.
  
-# Design
+# Design Principles
 * I am following KISS principle and keeping it simple. At present we are reading/writing to a file, in case input/output
  ways changes, we can code to interface and write corresponding classes which override them and this can be controlled 
  using configuration. You can use something like reader/writer interfaces which can do this
