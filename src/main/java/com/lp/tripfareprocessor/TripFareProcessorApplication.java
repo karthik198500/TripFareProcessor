@@ -1,6 +1,6 @@
 package com.lp.tripfareprocessor;
 
-import com.lp.tripfareprocessor.processinput.ProcessInput;
+import com.lp.tripfareprocessor.engine.TripFareEngine;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TripFareProcessorApplication implements CommandLineRunner {
 
     @Autowired
-    private ProcessInput processInput;
+    private TripFareEngine tripFareEngine;
 
     public static void main(String[] args) {
         log.info("STARTING THE APPLICATION");
@@ -23,7 +23,7 @@ public class TripFareProcessorApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         log.info("EXECUTING : command line runner");
-        processInput.run();
+        tripFareEngine.run();
     }
 }
 

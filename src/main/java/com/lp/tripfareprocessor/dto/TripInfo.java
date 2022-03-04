@@ -7,6 +7,8 @@ import com.opencsv.bean.processor.PreAssignmentProcessor;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Log4j2
@@ -14,6 +16,18 @@ import lombok.extern.log4j.Log4j2;
 @AllArgsConstructor
 @Builder
 public class TripInfo {
+
+    public static final String[] FIELDS_ORDER = {
+            "Started",
+            "Finished",
+            "DurationSecs",
+            "FromStopId",
+            "ToStopId",
+            "ChargeAmount",
+            "CompanyId",
+            "BusId",
+            "PAN",
+            "Status"};
 
     @PreAssignmentProcessor(processor = TrimStringBeforeRead.class)
     @CsvBindByName(column = "Started", required = true)
@@ -32,7 +46,7 @@ public class TripInfo {
     private String toStopId;
 
     @CsvBindByName(column = "ChargeAmount", required = false)
-    private String chargeAmount;
+    private BigDecimal chargeAmount;
 
     @CsvBindByName(column = "CompanyId", required = true)
     private String companyId;

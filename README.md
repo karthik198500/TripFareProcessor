@@ -2,7 +2,10 @@
 Trip Fare Processor
 
 # Technologies used
+* Java 8
 * OpenCSV
+* Spring Boot
+* 
 
 # Clarifications & Assumptions
 * Can a bus break down and customer catching a different bus and continuing the journey- Assuming all are given in the
@@ -10,7 +13,7 @@ Trip Fare Processor
 * If the customer does not Touch off by the end of midnight it is considered as Touch Off. Any new touch after this is 
 considered as starting a new journey or Touch On.
 * I am assuming there are two input files - one which contains the cost information and other which contains the 
-information about the trips.
+  information about the trips.
 * 
 
 # Assumptions on the input file
@@ -30,6 +33,20 @@ information about the trips.
   trip. We assume these scenarios are handled appropriately and input is free of such kind of issues. It can be easily 
   handled by forcing to TAP OFF at the end of journey or no fare concepts is changed to based on time too.
 
+# Validations
+* There are lot of validations that can be performed on the system including on values in the CSV and empty and NULL
+  values, In order to keep the exercise scope minimal and as provided in the problem statement "input file is
+  well formed and is not missing data.", we are cutting down on the many possible cases of validation errors.
+* There are RowValidator and LineValidator which can help us validate if the input line is empty.
+
+# File Size and performance
+* Time vs. memory: The classic trade-off. If memory is not a problem, read using CsvToBean.parse() or CsvToBean.stream()
+ ,which will read all beans at once and are multi-threaded. If your memory is limited, use CsvToBean.iterator() and 
+ iterate over the input. Only one bean is read at a time, making multi-threading impossible and slowing down reading, 
+ but only one object is in memory at a time (assuming you process and release the object for the garbage collector 
+ immediately).
+* For this exercise I have keep it simple.
+
 # Scalability
 * This is a spring boot application, we can easily scale this application by running the same
 application on multiple nodes.
@@ -38,6 +55,11 @@ application on multiple nodes.
 to rest api and process the incoming file. But we need proper UI for this to upload the file on another hand we can 
 consider this as service which takes incoming events, each event consisting a input file.
  
+# Design
+* I am following KISS principle and keeping it simple. At present we are reading/writing to a file, in case input/output
+ ways changes, we can code to interface and write corresponding classes which override them and this can be controlled 
+ using configuration. You can use something like reader/writer interfaces which can do this
+* 
 
 # Further Enhancements
 * Print customer journies for a month and date

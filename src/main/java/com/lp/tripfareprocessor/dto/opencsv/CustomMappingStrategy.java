@@ -16,6 +16,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CustomMappingStrategy<T> extends HeaderColumnNameTranslateMappingStrategy<T> {
+
+    /*
+        We have to write this function because provided CSV contain spaces after commas. While spaces in
+        CSV is debatable, current class handles by trimming it.
+    * */
     @Override
     public void captureHeader(CSVReader reader) throws IOException, CsvRequiredFieldEmptyException {
         if (this.type == null) {
