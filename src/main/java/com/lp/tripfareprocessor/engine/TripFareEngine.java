@@ -8,6 +8,7 @@ import com.lp.tripfareprocessor.processinput.ProcessTapInfo;
 
 import com.lp.tripfareprocessor.writeOutput.WriteTripInfo;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -28,11 +29,25 @@ public class TripFareEngine {
         this.writeTripInfo = writeTripInfo;
         this.customerTapBucketEngine = customerTapBucketEngine;
     }
+    @Value("${tap-info}")
+    private String tapInformationSrc;
 
+    @Value("${price-info}")
+    private String priceInput;
+
+    @Value("${trip-customer}")
+    private String tripsForCustomer;
+
+    public void run(String tapInformationSrc, String priceInformationSrc, String outputFile) {
+        this.tapInformationSrc = tapInformationSrc;
+        this.priceInput = priceInformationSrc;
+        this.tripsForCustomer = outputFile;
+        run();
+    }
 
     public  void run(){
-        List<PriceInfo> priceInfoList = processPriceInfo.parsePriceInfo();
-        List<TapInfo> tapInfoList = processTapInfo.parseTapInfo();
+        List<PriceInfo> priceInfoList = processPriceInfo.parsePriceInfo(priceInput);
+        List<TapInfo> tapInfoList = processTapInfo.parseTapInfo(tapInformationSrc);
 
             //Group by Customer and then sort the Tap Information based on the timestamp
             Map<String, List<TapInfo>> groupByCustomer = tapInfoList
@@ -64,10 +79,8 @@ public class TripFareEngine {
                             tripInfoList) ->arrayList.addAll(tripInfoList),
                             ArrayList::addAll);// Combine all the values which will be return to output CSV
 
-
-
         //Write the Trip Information to the Output Stream
-            writeTripInfo.writeTripInfoToOutput(tripInfoArrayList);
+            writeTripInfo.writeTripInfoToOutput(tripInfoArrayList,tripsForCustomer);
     }
 
 

@@ -11,6 +11,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,8 +25,7 @@ import java.util.stream.Collectors;
 @Log4j2
 public class ProcessPriceInfo {
 
-    @Value("${price-info}")
-    private String priceInput;
+
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -45,9 +45,9 @@ public class ProcessPriceInfo {
         priceInfoCustomMappingStrategy.setColumnMapping(priceInfoMap);
     }
 
-    public List<PriceInfo> parsePriceInfo(){
+    public List<PriceInfo> parsePriceInfo(String priceInput){
         try(FileReader priceInfoFileReader =
-                    new FileReader(resourceLoader.getResource("classpath:"+priceInput).getFile())) {
+                    new FileReader(priceInput)) {
             priceInfoList = new CsvToBeanBuilder<PriceInfo>(priceInfoFileReader)
                     .withType(PriceInfo.class)
                     .withMappingStrategy(priceInfoCustomMappingStrategy)

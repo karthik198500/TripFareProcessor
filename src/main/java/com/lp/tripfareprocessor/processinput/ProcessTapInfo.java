@@ -21,11 +21,7 @@ import java.util.stream.Collectors;
 @Log4j2
 public class ProcessTapInfo {
 
-    @Value("${tap-info}")
-    private String tripInput;
 
-    @Value("${trip-customer}")
-    private String tripsForCustomer;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -51,12 +47,10 @@ public class ProcessTapInfo {
         tapInfoCustomMappingStrategy.setColumnMapping(tapInfoMap);
     }
 
-    public  List<TapInfo> parseTapInfo(){
-        log.info(tripInput);
-        log.info(tripsForCustomer);
+    public  List<TapInfo> parseTapInfo(String tripInput){
         List<TapInfo> tapInfoList = new ArrayList<>();
 
-        try(FileReader tripInfoFileReader = new FileReader(resourceLoader.getResource("classpath:"+tripInput).getFile())) {
+        try(FileReader tripInfoFileReader = new FileReader(tripInput)) {
 
             // Read line by line to avoid out of memory error.
             CsvToBean<TapInfo> csvToBean = new CsvToBeanBuilder<TapInfo>(tripInfoFileReader)

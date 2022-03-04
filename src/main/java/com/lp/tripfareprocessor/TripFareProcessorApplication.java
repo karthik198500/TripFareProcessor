@@ -22,8 +22,14 @@ public class TripFareProcessorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        log.info("EXECUTING : command line runner");
-        tripFareEngine.run();
+        if(null!= args && args.length >=2){
+            String tapInformationSrc = args[0];
+            String priceInformationSrc = args[1];
+            String outputFile = args[2];
+            log.info("EXECUTING : command line runner");
+            tripFareEngine.run(tapInformationSrc,priceInformationSrc,outputFile);
+        }
+
     }
 }
 

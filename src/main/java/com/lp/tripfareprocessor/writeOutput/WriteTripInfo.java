@@ -23,13 +23,7 @@ import java.util.List;
 @Log4j2
 public class WriteTripInfo {
 
-    @Value("${trip-customer}")
-    private String tripsForCustomer;
-
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    public void writeTripInfoToOutput(List<TripInfo> tripInfoArrayList) {
+    public void writeTripInfoToOutput(List<TripInfo> tripInfoArrayList, String tripsForCustomer) {
 
         File file = new File(tripsForCustomer);
         //Writer writer = new FileWriter(resourceLoader.getResource("classpath:"+tripsForCustomer).getFile())

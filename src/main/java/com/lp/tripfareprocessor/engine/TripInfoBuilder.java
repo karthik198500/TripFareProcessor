@@ -45,7 +45,6 @@ public class TripInfoBuilder {
                 return new BigDecimal(Double.parseDouble(priceInfo.getFair()));
             }
         }
-
         return null;
     }
 
