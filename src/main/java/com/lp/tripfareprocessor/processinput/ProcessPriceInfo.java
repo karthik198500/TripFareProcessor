@@ -22,15 +22,15 @@ import java.util.stream.Collectors;
 @Log4j2
 public class ProcessPriceInfo {
 
-    private static Map<String, String> priceInfoMap;
-    private CustomMappingStrategy<PriceInfo> priceInfoCustomMappingStrategy;
+    private static Map<String, String> priceInfoMap = null ;
+    private CustomMappingStrategy<PriceInfo> priceInfoCustomMappingStrategy = null;
     private List<PriceInfo> priceInfoList;
 
     @PostConstruct
     public void init(){
-        priceInfoMap = new HashMap<>();
-        priceInfoCustomMappingStrategy = new CustomMappingStrategy<>();
         //Mapping between bean property names and header names in CSV
+        priceInfoMap = new HashMap<>() ;
+        priceInfoCustomMappingStrategy = new CustomMappingStrategy<>();
         priceInfoMap.put("source","sourceStationId");
         priceInfoMap.put("destination","destinationStationId");
         priceInfoMap.put("fair","fair");

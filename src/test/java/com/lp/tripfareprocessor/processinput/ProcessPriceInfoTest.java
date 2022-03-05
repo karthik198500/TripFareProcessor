@@ -5,6 +5,7 @@ import com.lp.tripfareprocessor.util.opencsv.CustomMappingStrategy;
 import com.opencsv.exceptions.CsvChainedException;
 import com.opencsv.exceptions.CsvFieldAssignmentException;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -28,17 +29,14 @@ class ProcessPriceInfoTest {
     @InjectMocks
     private ProcessPriceInfo processPriceInfo;
 
-
     @Mock
     private CustomMappingStrategy<PriceInfo> customMappingStrategy;
-
 
     @TempDir
     File anotherTempDir;
 
     @Mock
     PriceInfo priceInfo;
-
 
     @BeforeEach
     void setUp() {
@@ -51,18 +49,13 @@ class ProcessPriceInfoTest {
 
     @Test
     void parsePriceInfo() {
-        PriceInfo priceInfo = PriceInfo.builder()
-                .sourceStationId("stop no1")
-                .destinationStationId("stop no2")
-                .fair("20.01").build();
         File priceFile = createPricesFile();
         processPriceInfo.init();
-    /*    try {
-            Mockito.when(customMappingStrategy.populateNewBean(Mockito.any())).thenReturn(priceInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        processPriceInfo.parsePriceInfo(priceFile.getPath());
+        List<PriceInfo> priceInfoList = processPriceInfo.parsePriceInfo(priceFile.getPath());
+        Assertions.assertTrue(priceInfoList.size() ==3);
+        Assertions.assertTrue(priceInfoList.get(0).getSourceStationId().equalsIgnoreCase("1"));
+        Assertions.assertTrue(priceInfoList.get(0).getDestinationStationId().equalsIgnoreCase("2"));
+        Assertions.assertTrue(priceInfoList.get(0).getFair().equalsIgnoreCase("3.25"));
     }
 
 
@@ -80,5 +73,21 @@ class ProcessPriceInfoTest {
         return nemFile;
     }
 
+    @Test
+    void parsePriceInfoWithEmptyFile() {
+        File priceFile = createEmptyFile();
+        processPriceInfo.init();
+        List<PriceInfo> priceInfoList = processPriceInfo.parsePriceInfo(priceFile.getPath());
+        Assertions.assertTrue(priceInfoList.size() ==0);
+    }
+
+    private File createEmptyFile() {
+        File nemFile = new File(anotherTempDir, "route-prices.csv");
+        try {
+            Files.write(nemFile.toPath(), Arrays.asList(""));
+        } catch (IOException e) {
+        }
+        return nemFile;
+    }
 
 }

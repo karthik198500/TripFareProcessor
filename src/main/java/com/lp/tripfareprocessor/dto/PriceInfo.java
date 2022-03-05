@@ -3,13 +3,13 @@ package com.lp.tripfareprocessor.dto;
 import com.lp.tripfareprocessor.util.opencsv.TrimStringBeforeRead;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.processor.PreAssignmentProcessor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PriceInfo {
 
     @PreAssignmentProcessor(processor = TrimStringBeforeRead.class)
