@@ -28,9 +28,7 @@ public class WriteTripInfo {
         File file = new File(tripsForCustomer);
         //Writer writer = new FileWriter(resourceLoader.getResource("classpath:"+tripsForCustomer).getFile())
         try( Writer writer = new FileWriter(file);
-             CSVWriter csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, '"', "\n");
-
-        ){
+             CSVWriter csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, '"', "\n")){
             HeaderColumnNameMappingStrategy<TripInfo> strategy = new HeaderColumnNameMappingStrategyBuilder<TripInfo>().build();
             strategy.setType(TripInfo.class);
             strategy.setColumnOrderOnWrite(new OrderedComparatorIgnoringCase(TripInfo.FIELDS_ORDER));

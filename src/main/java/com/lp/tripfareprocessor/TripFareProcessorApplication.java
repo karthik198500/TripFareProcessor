@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +18,15 @@ public class TripFareProcessorApplication implements CommandLineRunner {
 
     @Autowired
     private TripFareEngine tripFareEngine;
+
+    @Value("${tap-info}")
+    private String tapInformationSrc;
+
+    @Value("${price-info}")
+    private String priceInput;
+
+    @Value("${trip-customer}")
+    private String tripsForCustomer;
 
     public static void main(String[] args) {
         log.info("STARTING THE APPLICATION");
@@ -32,11 +42,12 @@ public class TripFareProcessorApplication implements CommandLineRunner {
             String outputFile = args[2];
             log.info("EXECUTING : command line runner");
             tripFareEngine.run(tapInformationSrc,priceInformationSrc,outputFile);
-        }else{
-            log.error("Please run the program with atleast three input argument. Please correct and try again.");
+        }else if (null!= tapInformationSrc && null!= priceInput && null!= tripsForCustomer){
+            tripFareEngine.run();
+        }else {
+            log.error("Please run the program with at least three input argument. Please correct and try again.");
             throw new RuntimeException("Please run the program with atleast three input argument. Please correct and try again.");
         }
-
     }
 }
 
