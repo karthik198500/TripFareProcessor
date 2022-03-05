@@ -18,12 +18,14 @@ public class ProcessTapInfo {
 
     private static BigDecimal ZERO_FAIR = new BigDecimal(0.0);
 
-    private static Map<String, String> tapInfoMap = new HashMap<>();
-    private CustomMappingStrategy<TapInfo> tapInfoCustomMappingStrategy = new CustomMappingStrategy<>();
+    private static Map<String, String> tapInfoMap = null;
+    private CustomMappingStrategy<TapInfo> tapInfoCustomMappingStrategy = null;
 
 
     @PostConstruct
     public void init(){
+        tapInfoMap = new HashMap<>();
+        tapInfoCustomMappingStrategy = new CustomMappingStrategy<>();
         //Mapping between bean property names and header names in CSV
         tapInfoMap.put("ID","id");
         tapInfoMap.put("DateTimeUTC","tapTimeStamp");
