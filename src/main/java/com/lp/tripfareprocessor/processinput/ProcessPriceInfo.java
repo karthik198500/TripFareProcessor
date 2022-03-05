@@ -1,39 +1,35 @@
 package com.lp.tripfareprocessor.processinput;
 
 import com.lp.tripfareprocessor.dto.PriceInfo;
-import com.lp.tripfareprocessor.dto.TapInfo;
-import com.lp.tripfareprocessor.dto.opencsv.CustomMappingStrategy;
+import com.lp.tripfareprocessor.util.opencsv.CustomMappingStrategy;
 import com.opencsv.bean.CsvToBeanBuilder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 @Component
 @Log4j2
 public class ProcessPriceInfo {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    private static Map<String, String> priceInfoMap = new HashMap<>();
-    private CustomMappingStrategy<PriceInfo> priceInfoCustomMappingStrategy = new CustomMappingStrategy<>();
+    private static Map<String, String> priceInfoMap;
+    private CustomMappingStrategy<PriceInfo> priceInfoCustomMappingStrategy;
     private List<PriceInfo> priceInfoList;
 
     @PostConstruct
-    private void init(){
+    public void init(){
+        priceInfoMap = new HashMap<>();
+        priceInfoCustomMappingStrategy = new CustomMappingStrategy<>();
         //Mapping between bean property names and header names in CSV
         priceInfoMap.put("source","sourceStationId");
         priceInfoMap.put("destination","destinationStationId");

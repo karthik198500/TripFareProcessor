@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @Log4j2
-public class TripInfoBuilder {
+public class TripBuilder {
 
     private static BigDecimal ZERO_FAIR = new BigDecimal(0.0);
 

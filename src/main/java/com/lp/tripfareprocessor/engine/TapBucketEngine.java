@@ -6,10 +6,8 @@ import com.lp.tripfareprocessor.dto.TripInfo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -20,10 +18,10 @@ import java.util.Stack;
 @Setter
 public class TapBucketEngine {
 
-    private final TripInfoBuilder tripInfoBuilder;
+    private final TripBuilder tripBuilder;
 
-    public TapBucketEngine(TripInfoBuilder tripInfoBuilder) {
-        this.tripInfoBuilder = tripInfoBuilder;
+    public TapBucketEngine(TripBuilder tripBuilder) {
+        this.tripBuilder = tripBuilder;
     }
 
     public List<TripInfo> convertToTripInfoForCustomer(String pan,
@@ -38,7 +36,7 @@ public class TapBucketEngine {
                     }else{
                         TapInfo top = tapInfoStack.peek();
                         if(canMerge(top,currentTapInfo)){
-                            tripInfoArrayList.add(tripInfoBuilder.constructTripInfo(tapInfoStack.pop(),currentTapInfo,priceInfoList));
+                            tripInfoArrayList.add(tripBuilder.constructTripInfo(tapInfoStack.pop(),currentTapInfo,priceInfoList));
                         }else{
                             tapInfoStack.push(currentTapInfo);
                         }
@@ -48,7 +46,7 @@ public class TapBucketEngine {
         //If there are any remaining rows in the stack just add them to Trip Info. These are rows which have only one
         // matching TAP ON or TAP OFF.
         tapInfoStack.forEach( tapInfo -> {
-            tripInfoArrayList.add(tripInfoBuilder.constructTripInfo(tapInfo,null,priceInfoList));
+            tripInfoArrayList.add(tripBuilder.constructTripInfo(tapInfo,null,priceInfoList));
         });
         return tripInfoArrayList;
     }

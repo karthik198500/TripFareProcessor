@@ -1,8 +1,7 @@
 package com.lp.tripfareprocessor.dto;
 
-import com.lp.tripfareprocessor.dto.opencsv.TrimStringBeforeRead;
+import com.lp.tripfareprocessor.util.opencsv.TrimStringBeforeRead;
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.processor.ConvertEmptyOrBlankStringsToDefault;
 import com.opencsv.bean.processor.PreAssignmentProcessor;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;

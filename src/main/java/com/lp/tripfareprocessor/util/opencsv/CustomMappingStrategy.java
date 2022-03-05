@@ -1,12 +1,10 @@
-package com.lp.tripfareprocessor.dto.opencsv;
+package com.lp.tripfareprocessor.util.opencsv;
 
 import com.opencsv.CSVReader;
 import com.opencsv.bean.FieldMapByNameEntry;
 import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
-import com.opencsv.bean.MappingStrategy;
 import com.opencsv.exceptions.*;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

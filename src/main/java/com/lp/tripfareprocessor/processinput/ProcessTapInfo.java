@@ -1,30 +1,20 @@
 package com.lp.tripfareprocessor.processinput;
 
-import com.lp.tripfareprocessor.dto.PriceInfo;
 import com.lp.tripfareprocessor.dto.TapInfo;
-import com.lp.tripfareprocessor.dto.opencsv.CustomMappingStrategy;
+import com.lp.tripfareprocessor.util.opencsv.CustomMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 @Log4j2
 public class ProcessTapInfo {
-
-
-
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     private static BigDecimal ZERO_FAIR = new BigDecimal(0.0);
 
@@ -33,7 +23,7 @@ public class ProcessTapInfo {
 
 
     @PostConstruct
-    private void init(){
+    public void init(){
         //Mapping between bean property names and header names in CSV
         tapInfoMap.put("ID","id");
         tapInfoMap.put("DateTimeUTC","tapTimeStamp");

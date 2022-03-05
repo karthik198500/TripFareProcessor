@@ -35,9 +35,6 @@ class TripFareEngineTest extends BaseTest{
         MockitoAnnotations.initMocks(this);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void run() {

@@ -24,7 +24,7 @@ class TapBucketEngineTest extends BaseTest {
     private TapBucketEngine tapBucketEngine;
 
     @Mock
-    private TripInfoBuilder tripInfoBuilder;
+    private TripBuilder tripBuilder;
 
     @BeforeEach
     void setUp() {
@@ -49,7 +49,7 @@ class TapBucketEngineTest extends BaseTest {
                 .companyId("google")
                 .build();
 
-        Mockito.when(tripInfoBuilder.constructTripInfo(Mockito.any(TapInfo.class),
+        Mockito.when(tripBuilder.constructTripInfo(Mockito.any(TapInfo.class),
                 Mockito.any(TapInfo.class),Mockito.anyList())).thenReturn(tripInfo);
 
         /*

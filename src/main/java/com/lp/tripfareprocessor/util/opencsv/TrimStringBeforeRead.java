@@ -1,4 +1,4 @@
-package com.lp.tripfareprocessor.dto.opencsv;
+package com.lp.tripfareprocessor.util.opencsv;
 
 import com.opencsv.bean.processor.ConvertEmptyOrBlankStringsToDefault;
 

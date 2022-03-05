@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TripInfoBuilderTest {
 
     @InjectMocks
-    private TripInfoBuilder tripInfoBuilder;
+    private TripBuilder tripInfoBuilder;
 
     @BeforeEach
     void setUp() {
