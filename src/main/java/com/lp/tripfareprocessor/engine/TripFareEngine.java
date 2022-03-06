@@ -56,7 +56,7 @@ public class TripFareEngine {
                     .collect(Collectors.groupingByConcurrent(TapInfo::getPan))
                     .entrySet()
                     .stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey,
+                    .collect(Collectors.toConcurrentMap(Map.Entry::getKey,
                             e -> e.getValue()
                                     .stream()
                                     .sorted(Comparator.comparing(TapInfo::getTapTimeStamp)) // Sort based on timestamp
