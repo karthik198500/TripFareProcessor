@@ -1,18 +1,22 @@
 # TripFareProcessor
 Trip Fare Processor
 
+# Technologies used
+* Java 8
+* OpenCSV
+* Spring Boot
+* Intellij
+* Maven
+
 # Run Program
-* Build the program
+* Check out and build the program using intellij or eclipse and run mvn install to generate the jar.
 * Grab the jar from the target folder and run using the below command.
 * Please provide the absolute paths of the Tap Information CSV, Price Information CSV and the Output file.
 * Assumption - All Files including output file has to exist and paths has to be valid. Not doing too much validation here.
 * java -jar TripFareProcessor-0.1.jar <tap-info.csv> <route-prices.csv> <trips-customer.csv>
 * Ex: java -jar TripFareProcessor-0.1.jar /Users/kkasiraju/dev/MyMusings/TripFareProcessor/src/main/resources/input/tap-info.csv /Users/kkasiraju/dev/MyMusings/TripFareProcessor/src/main/resources/input/route-prices.csv /Users/kkasiraju/dev/MyMusings/TripFareProcessor/src/main/resources/output/trips-customer.csv
 * I have followed two ways to run the program, you can also run the program by configuring the file names in the application.properties
-# Technologies used
-* Java 8
-* OpenCSV
-* Spring Boot
+
 
 # Design
 * Please refer the TripFare.pdf in the resources/design folder for a high level architecture.
