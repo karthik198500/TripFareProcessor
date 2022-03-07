@@ -73,8 +73,14 @@ consider this as service which takes incoming events, each event consisting a in
 * I am following KISS principle and keeping it simple. At present we are reading/writing to a file, in case input/output
  ways changes, we can code to interface and write corresponding classes which override them and this can be controlled 
  using configuration. You can use something like reader/writer interfaces which can do this
-* 
+* SOLID
+* KISS
+* Stateless
+* DTO layer
+
 
 # Further Enhancements
 * Print customer journies for a month and date
 * Introduce the concepts of Pass and the fares will change accordingly
+* Security and versioning 
+* Scalability through horizantal scaling and using appropiate cloud stuctures based on the load and kind of inputs - Using Amazon lambads or servesless and using appropiate databases like (REDIS), Kafta or event driven architectue. 
