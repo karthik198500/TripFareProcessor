@@ -54,7 +54,7 @@ public class TapInfo {
         return "TapInfo{" +
                 " pan='" + pan + '\'' +
                 ", id='" + id + '\'' +
-                ", tapTimeStamp=" + tapTimeStamp != null?dateFormat.format(tapTimeStamp):"" +
+                ", tapTimeStamp=" + (tapTimeStamp != null?dateFormat.format(tapTimeStamp):"") +
                 ", tapType='" + tapType + '\'' +
                 ", stopId='" + stopId + '\'' +
                 ", companyId='" + companyId + '\'' +
